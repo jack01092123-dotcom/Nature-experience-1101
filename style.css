@@ -1,0 +1,316 @@
+/* ============================================================
+   style.css —— 決定遊戲「長什麼樣子」
+   想換顏色？改最上面 :root 裡的色碼就好。
+   ============================================================ */
+
+:root {
+  --green: #2f5d50;        /* 主色：深綠 */
+  --green-light: #e4efe9;  /* 淺綠 */
+  --bg: #f4f8f5;           /* 網頁背景 */
+  --card: #ffffff;         /* 卡片背景 */
+  --ink: #1f2d28;          /* 文字顏色 */
+  --muted: #6b7c75;        /* 次要文字 */
+  --line: #d3e0d9;         /* 邊框線 */
+  --accent: #e0a82e;       /* 強調色：金黃 */
+  --bad: #b5483a;          /* 錯誤：紅 */
+  --warn: #b7791f;         /* 提醒：橘 */
+  --ok: #2f7d4f;           /* 成功：綠 */
+}
+
+* { box-sizing: border-box; }
+
+/* 讓 hidden 屬性一定有效 */
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  font-family: "Microsoft JhengHei", "PingFang TC", "Noto Sans TC", sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.7;
+}
+
+/* ---------- 標題列 ---------- */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  background: var(--green);
+  color: #fff;
+}
+.brand { font-size: 1.15rem; font-weight: bold; }
+.status { display: flex; align-items: center; gap: 12px; font-size: 0.95rem; }
+
+/* ---------- 分頁 ---------- */
+.tabs, main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+.tabs { display: flex; gap: 8px; padding-top: 16px; }
+.tab {
+  flex: 1;
+  padding: 10px 8px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+}
+.tab.active { background: var(--green); color: #fff; border-color: var(--green); }
+
+main { padding-top: 16px; padding-bottom: 48px; }
+
+/* ---------- 通用元件 ---------- */
+.panel {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 20px;
+}
+.panel h1, .panel h2 { margin: 0 0 8px; color: var(--green); }
+.panel h3 { margin: 20px 0 8px; color: var(--green); }
+.lead { font-size: 1.1rem; }
+.muted { color: var(--muted); font-size: 0.95rem; }
+.success { color: var(--ok); font-weight: bold; font-size: 1.05rem; }
+.tag {
+  display: inline-block;
+  margin: 0 0 4px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: var(--green-light);
+  color: var(--green);
+  font-size: 0.85rem;
+}
+
+button { font: inherit; }
+
+.primary {
+  margin-top: 12px;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 10px;
+  background: var(--green);
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+.primary:hover { background: #244a40; }
+
+.ghost {
+  padding: 4px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+.ghost:hover { background: rgba(255, 255, 255, 0.15); }
+
+.howto li { margin-bottom: 6px; }
+
+/* ---------- 調查畫面 ---------- */
+.loc-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+.loc {
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--card);
+  cursor: pointer;
+}
+.loc.active { background: var(--green-light); border-color: var(--green); color: var(--green); font-weight: bold; }
+.loc-intro { color: var(--muted); }
+
+.spots { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+.spot {
+  text-align: left;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--ink);
+}
+.spot p { margin: 4px 0 0; }
+.spot-head { font-weight: bold; color: var(--green); }
+.spot.new { cursor: pointer; border-style: dashed; border-width: 2px; }
+.spot.new:hover { background: var(--green-light); }
+.spot.got { background: #fbf7e8; border-color: var(--accent); }
+
+/* ---------- 證據板 ---------- */
+.nodes { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin: 12px 0; }
+.node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 8px;
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--ink);
+  cursor: pointer;
+}
+.node:hover { border-color: var(--green); }
+.node.selected { border-color: var(--accent); background: #fbf7e8; box-shadow: 0 0 0 3px rgba(224, 168, 46, 0.3); }
+.node-emoji { font-size: 1.8rem; }
+
+.links, .chain { list-style: none; padding: 0; margin: 0 0 8px; }
+.links li, .chain li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  border-radius: 8px;
+  background: var(--green-light);
+}
+.links li.muted { background: transparent; padding-left: 0; }
+.x {
+  margin-left: auto;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+.x:hover { color: var(--bad); }
+
+.notes { margin-top: 20px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 10px; }
+.notes summary { cursor: pointer; font-weight: bold; color: var(--green); }
+.notes ul { padding-left: 20px; }
+
+/* ---------- 因果鏈空格 ---------- */
+.slots { display: flex; align-items: stretch; gap: 8px; margin: 8px 0 12px; }
+.slot {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 108px;
+  padding: 10px 8px;
+  text-align: center;
+  border: 2px dashed var(--line);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--ink);
+  cursor: pointer;
+}
+.slot:hover { border-color: var(--green); }
+.slot.filled { border-style: solid; border-color: var(--green); background: var(--green-light); }
+.slot.active { border-color: var(--accent); background: #fbf7e8; box-shadow: 0 0 0 3px rgba(224, 168, 46, 0.3); }
+.slot-name { font-size: 0.85rem; font-weight: bold; color: var(--muted); }
+.slot-body { font-size: 1.05rem; font-weight: bold; min-height: 1.7em; }
+.slot-hint, .slot-mark { font-size: 0.8rem; color: var(--muted); }
+/* 失敗畫面裡的結果格（不能點） */
+div.slot { cursor: default; }
+.slot.ok { border-color: var(--ok); background: #e6f4ec; }
+.slot.bad { border-color: var(--bad); background: #fbeceb; }
+.slot.ok .slot-mark { color: var(--ok); font-weight: bold; }
+.slot.bad .slot-mark { color: var(--bad); font-weight: bold; }
+
+.arrow { align-self: center; font-size: 1.5rem; font-weight: bold; color: var(--green); }
+.chain-line { padding: 10px 14px; border-radius: 10px; background: var(--green-light); font-size: 1.1rem; }
+.sep { color: var(--green); }
+
+.board-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 12px; }
+.board-actions .primary { margin-top: 0; }
+.node:disabled { opacity: 0.35; cursor: not-allowed; }
+.node:disabled:hover { border-color: var(--line); }
+
+@media (max-width: 600px) {
+  .slots { flex-direction: column; }
+  .arrow { transform: rotate(90deg); }
+}
+
+/* ---------- 回饋訊息 ---------- */
+.feedback { margin-top: 16px; padding: 12px 16px; border-radius: 10px; border-left: 5px solid; }
+.feedback ul { margin: 6px 0 0; padding-left: 20px; }
+.feedback.bad { background: #fbeceb; border-color: var(--bad); }
+.feedback.warn { background: #fdf3e0; border-color: var(--warn); }
+
+/* ---------- 修復選項 ---------- */
+.options { display: grid; gap: 10px; }
+.option {
+  text-align: left;
+  padding: 14px 16px;
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--ink);
+  cursor: pointer;
+}
+.option:hover { border-color: var(--green); background: var(--green-light); }
+
+/* ---------- 圖鑑 ---------- */
+.codex { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.species { padding: 16px; border: 1px solid var(--line); border-radius: 12px; background: #fbfdfb; }
+.species h3 { margin: 4px 0; }
+.species p { margin: 4px 0; }
+.species-emoji { font-size: 2.4rem; }
+.species.locked { background: #eef1ef; color: var(--muted); }
+
+/* ---------- 失敗畫面與通關畫面 ---------- */
+.fail-title { color: var(--bad) !important; }
+.why { padding-left: 20px; margin: 0 0 8px; }
+.why li { margin-bottom: 6px; }
+.stars { font-size: 2rem; margin: 0; letter-spacing: 4px; }
+.danger-note { margin: 8px 0 0; color: var(--warn); font-size: 0.9rem; }
+
+/* ---------- 確認視窗 ---------- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(20, 30, 26, 0.55);
+}
+.dialog {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  border-radius: 14px;
+  background: var(--card);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+.dialog h3 { margin: 0 0 8px; }
+.dialog-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.dialog-actions .primary { margin-top: 0; }
+.secondary {
+  padding: 12px 24px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--ink);
+  cursor: pointer;
+}
+.secondary:hover { background: var(--green-light); }
+
+/* ---------- 小提示 ---------- */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  z-index: 10;
+}
+
+/* ---------- 手機版 ---------- */
+@media (max-width: 480px) {
+  .panel { padding: 14px; }
+  .brand { font-size: 1rem; }
+  .status { font-size: 0.85rem; gap: 8px; }
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>溪流偵探</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 最上面的標題列 -->
+  <header class="topbar">
+    <div class="brand">🔎 溪流偵探</div>
+    <div class="status">
+      <span id="attempt"></span>
+      <span id="clue-count"></span>
+      <button class="ghost" data-action="restart">重新開始</button>
+    </div>
+  </header>
+
+  <!-- 分頁按鈕，開始遊戲後才會顯示。由左到右：調查、圖鑑（中間）、證據板（最右邊） -->
+  <!-- 想調整順序，只要把下面三行的順序對調就可以了 -->
+  <nav id="tabs" class="tabs" hidden>
+    <button class="tab" data-action="tab" data-id="investigate">🗺️ 調查</button>
+    <button class="tab" data-action="tab" data-id="codex">📖 圖鑑</button>
+    <button class="tab" data-action="tab" data-id="board">🧩 證據板</button>
+  </nav>
+
+  <!-- 遊戲的主要畫面：由 game.js 負責把內容放進來 -->
+  <main id="app"></main>
+
+  <!-- 確認視窗（例如「確定要提交推理嗎？」）會顯示在這裡 -->
+  <div id="dialog"></div>
+
+  <!-- 蒐集到新物種時跳出的小提示 -->
+  <div id="toast" class="toast" hidden></div>
+
+  <!-- 先載入關卡資料，再載入遊戲程式（順序不能反） -->
+  <script src="level1.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
